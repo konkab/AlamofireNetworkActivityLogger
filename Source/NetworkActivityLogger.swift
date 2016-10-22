@@ -6,4 +6,9 @@
 //  Copyright © 2016 RKT Studio. All rights reserved.
 //
 
+import Alamofire
 import Foundation
+
+public class NetworkActivityLogger {
+	
+}
