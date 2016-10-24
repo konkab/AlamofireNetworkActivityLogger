@@ -90,7 +90,7 @@ Konstantin Kabanov
 
 - konstantin@rktstudio.ru
 - Skype: konstantin_kabanov
-- [Linkedin](https://ru.linkedin.com/in/konstantinkabanov
+- [Linkedin](https://ru.linkedin.com/in/konstantinkabanov)
 
 ## License
 
