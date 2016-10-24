@@ -30,13 +30,13 @@ public class NetworkActivityLogger {
 	/// Omit requests which match the specified predicate, if provided.
 	public var filterPredicate: NSPredicate?
 	
-	private var tasksStartDates: [URLSessionTask: Date]
+	private var startDates: [URLSessionTask: Date]
 	
 	// MARK: - Internal - Initialization
 	
 	init() {
 		level = .info
-		tasksStartDates = [URLSessionTask: Date]()
+		startDates = [URLSessionTask: Date]()
 	}
 	
 	deinit {
@@ -85,11 +85,11 @@ public class NetworkActivityLogger {
 			return
 		}
 		
-		tasksStartDates[task] = Date()
+		startDates[task] = Date()
 		
 		switch level {
 		case .debug:
-			print("\(httpMethod) '\(requestURL.absoluteString)'")
+			print("\(httpMethod) '\(requestURL.absoluteString)':")
 			
 			if let httpHeadersFields = request.allHTTPHeaderFields {
 				for (key, value) in httpHeadersFields {
@@ -111,9 +111,8 @@ public class NetworkActivityLogger {
 		guard let userInfo = notification.userInfo,
 			let task = userInfo[Notification.Key.Task] as? URLSessionTask,
 			let request = task.originalRequest,
-			let response = task.response as? HTTPURLResponse,
 			let httpMethod = request.httpMethod,
-			let responseURL = response.url
+			let requestURL = request.url
 			else {
 				return
 		}
@@ -124,9 +123,9 @@ public class NetworkActivityLogger {
 		
 		var elapsedTime: TimeInterval = 0.0
 		
-		if let startDate = tasksStartDates[task] {
+		if let startDate = startDates[task] {
 			elapsedTime = Date().timeIntervalSince(startDate)
-			tasksStartDates[task] = nil
+			startDates[task] = nil
 		}
 		
 		if let error = task.error {
@@ -135,20 +134,25 @@ public class NetworkActivityLogger {
 			     .info,
 			     .warn,
 			     .error:
-				print("[Error] \(httpMethod) '\(responseURL.absoluteString)' \(String(response.statusCode)) [\(String(format: "%.04f", elapsedTime)) s]: \(error)")
+				print("[Error] \(httpMethod) '\(requestURL.absoluteString)' [\(String(format: "%.04f", elapsedTime)) s]:")
+				print(error)
 			default:
 				break
 			}
 		} else {
+			guard let response = task.response as? HTTPURLResponse else {
+				return
+			}
+			
 			switch level {
 			case .debug:
-				print("\(String(response.statusCode)) '\(responseURL.absoluteString)' [\(String(format: "%.04f", elapsedTime)) s]")
+				print("\(String(response.statusCode)) '\(requestURL.absoluteString)' [\(String(format: "%.04f", elapsedTime)) s]:")
 				
 				for (key, value) in response.allHeaderFields {
 					print("\(key): \(value)")
 				}
 			case .info:
-				print("\(String(response.statusCode)) '\(responseURL.absoluteString)' [\(String(format: "%.04f", elapsedTime)) s]")
+				print("\(String(response.statusCode)) '\(requestURL.absoluteString)' [\(String(format: "%.04f", elapsedTime)) s]")
 			default:
 				break
 			}
