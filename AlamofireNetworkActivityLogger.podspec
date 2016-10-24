@@ -3,11 +3,11 @@ Pod::Spec.new do |s|
   s.version = '2.0.0'
   s.license = 'MIT'
   s.summary = 'Network request logger for Alamofire'
-  s.homepage = 'https://github.com/Alamofire/AlamofireImage'
-  s.social_media_url = 'http://twitter.com/AlamofireSF'
+  s.homepage = 'https://github.com/konkab/AlamofireNetworkActivityLogger'
+  s.social_media_url = 'https://www.linkedin.com/in/konstantinkabanov'
   s.authors = { 'Konstantin Kabanov' => 'konstantin@rktstudio.ru' }
 
-  s.source = { :git => 'https://github.com/Alamofire/AlamofireImage.git', :tag => s.version }
+  s.source = { :git => 'https://github.com/konkab/AlamofireNetworkActivityLogger.git', :tag => s.version }
   s.source_files = 'Source/*.swift'
 
   s.ios.deployment_target = '9.0'
