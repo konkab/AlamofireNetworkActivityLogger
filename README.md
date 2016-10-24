@@ -65,10 +65,33 @@ github "konkab/AlamofireNetworkActivityLogger" ~> 2.0
 
 ## Usage
 
+Add the following code to `AppDelegate.swift application:didFinishLaunchingWithOptions:`:
+
 ```swift
 NetworkActivityLogger.shared.startLogging()
 ```
 
+Now all NSURLSessionTask objects created by an Alamofire.SessionManager will have their request and response logged to the console, a la:
+
+```
+GET 'http://example.com/foo/bar.json'
+200 'http://example.com/foo/bar.json' [0.2535 s]
+```
+
+If the default logging level is too verbose—say, if you only want to know when requests fail—then changing it is as simple as:
+
+```swift
+NetworkActivityLogger.shared.level = .error
+```
+
+## Contact
+
+Konstantin Kabanov
+
+- konstantin@rktstudio.ru
+- Skype: konstantin_kabanov
+- [Linkedin](https://ru.linkedin.com/in/konstantinkabanov
+
 ## License
 
-AlamofireNetworkActivityIndicator is released under the MIT license. See LICENSE for details.
+AlamofireNetworkActivityLogger is released under the MIT license. See LICENSE for details.
