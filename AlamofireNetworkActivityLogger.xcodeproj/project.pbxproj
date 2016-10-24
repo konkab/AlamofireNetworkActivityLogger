@@ -765,6 +765,7 @@
 				AB2A9A641DBB5067004FC92E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AB2A9A6F1DBB5119004FC92E /* Build configuration list for PBXNativeTarget "AlamofireNetworkActivityLogger tvOS" */ = {
 			isa = XCConfigurationList;
@@ -773,6 +774,7 @@
 				AB2A9A711DBB5119004FC92E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AB2A9A7C1DBB512B004FC92E /* Build configuration list for PBXNativeTarget "AlamofireNetworkActivityLogger watchOS" */ = {
 			isa = XCConfigurationList;
@@ -781,6 +783,7 @@
 				AB2A9A7E1DBB512B004FC92E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
