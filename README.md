@@ -8,13 +8,13 @@ Network activity logger for Alamofire.
 
 ## Requirements
 
-- iOS 9.0+ / macOS 10.11+ / tvOS 9.0+ / watchOS 2.0+
+- iOS 8.0+ / Mac OS X 10.9+ / tvOS 9.0+ / watchOS 2.0+
 - Xcode 8.0+
-- Swift 3.0+
+- Swift 2.3
 
 ## Dependencies
 
-- [Alamofire 4.0+](https://github.com/Alamofire/Alamofire)
+- [Alamofire 3.5+](https://github.com/Alamofire/Alamofire)
 
 ## Installation
 
@@ -35,7 +35,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '10.0'
 use_frameworks!
 
-pod 'AlamofireNetworkActivityLogger', '~> 2.0'
+pod 'AlamofireNetworkActivityLogger', '~> 1.0'
 ```
 
 Then, run the following command:
@@ -58,7 +58,7 @@ $ brew install carthage
 To integrate AlamofireNetworkActivityLogger into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "konkab/AlamofireNetworkActivityLogger" ~> 2.0
+github "konkab/AlamofireNetworkActivityLogger" ~> 1.0
 ```
 
 ---
@@ -68,7 +68,7 @@ github "konkab/AlamofireNetworkActivityLogger" ~> 2.0
 Add the following code to `AppDelegate.swift application:didFinishLaunchingWithOptions:`:
 
 ```swift
-NetworkActivityLogger.shared.startLogging()
+NetworkActivityLogger.sharedLogger.startLogging()
 ```
 
 Now all NSURLSessionTask objects created by an Alamofire.SessionManager will have their request and response logged to the console, a la:
@@ -81,7 +81,7 @@ GET 'http://example.com/foo/bar.json'
 If the default logging level is too verbose—say, if you only want to know when requests fail—then changing it is as simple as:
 
 ```swift
-NetworkActivityLogger.shared.level = .error
+NetworkActivityLogger.sharedLogger.level = .Error
 ```
 
 ## Contact
