@@ -30,22 +30,22 @@ import Foundation
 /// The level of logging detail.
 public enum NetworkActivityLoggerLevel {
     /// Do not log requests or responses.
-    case off
+    case Off
     
     /// Logs HTTP method, URL, header fields, & request body for requests, and status code, URL, header fields, response string, & elapsed time for responses.
-    case debug
+    case Debug
     
     /// Logs HTTP method & URL for requests, and status code, URL, & elapsed time for responses.
-    case info
+    case Info
     
     /// Logs HTTP method & URL for requests, and status code, URL, & elapsed time for responses, but only for failed requests.
-    case warn
+    case Warn
     
     /// Equivalent to `.warn`
-    case error
+    case Error
     
     /// Equivalent to `.off`
-    case fatal
+    case Fatal
 }
 
 /// `NetworkActivityLogger` logs requests and responses made by Alamofire.SessionManager, with an adjustable level of detail.
@@ -61,13 +61,13 @@ public class NetworkActivityLogger {
     /// Omit requests which match the specified predicate, if provided.
     public var filterPredicate: NSPredicate?
     
-    private var startDates: [URLSessionTask: Date]
+    private var startDates: [NSURLSessionTask: NSDate]
     
     // MARK: - Internal - Initialization
     
     init() {
-        level = .info
-        startDates = [URLSessionTask: Date]()
+        level = .Info
+        startDates = [NSURLSessionTask: NSDate]()
     }
     
     deinit {
@@ -80,48 +80,47 @@ public class NetworkActivityLogger {
     public func startLogging() {
         stopLogging()
         
-        let notificationCenter = NotificationCenter.default
+        let notificationCenter = NSNotificationCenter.defaultCenter()
         
         notificationCenter.addObserver(
             self,
-            selector: #selector(NetworkActivityLogger.networkRequestDidStart(notification:)),
-            name: Notification.Name.Task.DidResume,
+            selector: #selector(NetworkActivityLogger.networkRequestDidStart(_:)),
+            name: Notifications.Task.DidResume,
             object: nil
         )
         
         notificationCenter.addObserver(
             self,
-            selector: #selector(NetworkActivityLogger.networkRequestDidComplete(notification:)),
-            name: Notification.Name.Task.DidComplete,
+            selector: #selector(NetworkActivityLogger.networkRequestDidComplete(_:)),
+            name: Notifications.Task.DidComplete,
             object: nil
         )
     }
     
     /// Stop logging requests and responses.
     public func stopLogging() {
-        NotificationCenter.default.removeObserver(self)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     // MARK: - Private - Notifications
     
-    @objc private func networkRequestDidStart(notification: Notification) {
-        guard let userInfo = notification.userInfo,
-            let task = userInfo[Notification.Key.Task] as? URLSessionTask,
+    @objc private func networkRequestDidStart(notification: NSNotification) {
+        guard let task = notification.object as? NSURLSessionTask,
             let request = task.originalRequest,
-            let httpMethod = request.httpMethod,
-            let requestURL = request.url
+            let httpMethod = request.HTTPMethod,
+            let requestURL = request.URL
             else {
                 return
         }
         
-        if let filterPredicate = filterPredicate, filterPredicate.evaluate(with: request) {
+        if let filterPredicate = filterPredicate where filterPredicate.evaluateWithObject(request) {
             return
         }
         
-        startDates[task] = Date()
+        startDates[task] = NSDate()
         
         switch level {
-        case .debug:
+        case .Debug:
             print("\(httpMethod) '\(requestURL.absoluteString)':")
             
             if let httpHeadersFields = request.allHTTPHeaderFields {
@@ -130,61 +129,60 @@ public class NetworkActivityLogger {
                 }
             }
             
-            if let httpBody = request.httpBody, let httpBodyString = String(data: httpBody, encoding: .utf8) {
+            if let httpBody = request.HTTPBody, let httpBodyString = String(data: httpBody, encoding: NSUTF8StringEncoding) {
                 print(httpBodyString)
             }
-        case .info:
+        case .Info:
             print("\(httpMethod) '\(requestURL.absoluteString)'")
         default:
             break
         }
     }
     
-    @objc private func networkRequestDidComplete(notification: Notification) {
-        guard let userInfo = notification.userInfo,
-            let task = userInfo[Notification.Key.Task] as? URLSessionTask,
+    @objc private func networkRequestDidComplete(notification: NSNotification) {
+        guard let task = notification.object as? NSURLSessionTask,
             let request = task.originalRequest,
-            let httpMethod = request.httpMethod,
-            let requestURL = request.url
+            let httpMethod = request.HTTPMethod,
+            let requestURL = request.URL
             else {
                 return
         }
         
-        if let filterPredicate = filterPredicate, filterPredicate.evaluate(with: request) {
+        if let filterPredicate = filterPredicate where filterPredicate.evaluateWithObject(request) {
             return
         }
         
-        var elapsedTime: TimeInterval = 0.0
+        var elapsedTime: NSTimeInterval = 0.0
         
         if let startDate = startDates[task] {
-            elapsedTime = Date().timeIntervalSince(startDate)
+            elapsedTime = NSDate().timeIntervalSinceDate(startDate)
             startDates[task] = nil
         }
         
         if let error = task.error {
             switch level {
-            case .debug,
-                 .info,
-                 .warn,
-                 .error:
+            case .Debug,
+                 .Info,
+                 .Warn,
+                 .Error:
                 print("[Error] \(httpMethod) '\(requestURL.absoluteString)' [\(String(format: "%.04f", elapsedTime)) s]:")
                 print(error)
             default:
                 break
             }
         } else {
-            guard let response = task.response as? HTTPURLResponse else {
+            guard let response = task.response as? NSHTTPURLResponse else {
                 return
             }
             
             switch level {
-            case .debug:
+            case .Debug:
                 print("\(String(response.statusCode)) '\(requestURL.absoluteString)' [\(String(format: "%.04f", elapsedTime)) s]:")
                 
                 for (key, value) in response.allHeaderFields {
                     print("\(key): \(value)")
                 }
-            case .info:
+            case .Info:
                 print("\(String(response.statusCode)) '\(requestURL.absoluteString)' [\(String(format: "%.04f", elapsedTime)) s]")
             default:
                 break
