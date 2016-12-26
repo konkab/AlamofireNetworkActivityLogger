@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'AlamofireNetworkActivityLogger'
-  s.version = '2.0.0'
+  s.version = '2.2.0'
   s.license = 'MIT'
   s.summary = 'Network request logger for Alamofire'
   s.homepage = 'https://github.com/konkab/AlamofireNetworkActivityLogger'
