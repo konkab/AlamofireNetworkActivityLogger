@@ -141,7 +141,8 @@ public class NetworkActivityLogger {
     }
     
     @objc private func networkRequestDidComplete(notification: Notification) {
-        guard let userInfo = notification.userInfo,
+        guard let sessionDelegate = notification.object as? SessionDelegate,
+            let userInfo = notification.userInfo,
             let task = userInfo[Notification.Key.Task] as? URLSessionTask,
             let request = task.originalRequest,
             let httpMethod = request.httpMethod,
@@ -183,6 +184,21 @@ public class NetworkActivityLogger {
                 
                 for (key, value) in response.allHeaderFields {
                     print("\(key): \(value)")
+                }
+                
+                guard let data = sessionDelegate[task]?.delegate.data else { break }
+                    
+                do {
+                    let jsonObject = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+                    let prettyData = try JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted)
+                    
+                    if let prettyString = String(data: prettyData, encoding: .utf8) {
+                        print(prettyString)
+                    }
+                } catch {
+                    if let string = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
+                        print(string)
+                    }
                 }
             case .info:
                 print("\(String(response.statusCode)) '\(requestURL.absoluteString)' [\(String(format: "%.04f", elapsedTime)) s]")
