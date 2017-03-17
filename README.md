@@ -65,6 +65,12 @@ github "konkab/AlamofireNetworkActivityLogger" ~> 2.0
 
 ## Usage
 
+Import the library:
+
+```
+import AlamofireNetworkActivityLogger
+```
+
 Add the following code to `AppDelegate.swift application:didFinishLaunchingWithOptions:`:
 
 ```swift
