@@ -185,21 +185,6 @@ public class NetworkActivityLogger {
                 for (key, value) in response.allHeaderFields {
                     print("\(key): \(value)")
                 }
-                
-                guard let data = sessionDelegate[task]?.delegate.data else { break }
-                    
-                do {
-                    let jsonObject = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-                    let prettyData = try JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted)
-                    
-                    if let prettyString = String(data: prettyData, encoding: .utf8) {
-                        print(prettyString)
-                    }
-                } catch {
-                    if let string = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
-                        print(string)
-                    }
-                }
             case .info:
                 print("\(String(response.statusCode)) '\(requestURL.absoluteString)' [\(String(format: "%.04f", elapsedTime)) s]")
             default:
