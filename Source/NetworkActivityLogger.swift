@@ -127,9 +127,7 @@ public class NetworkActivityLogger {
             print("\(httpMethod) '\(requestURL.absoluteString)':")
             
             if let httpHeadersFields = request.allHTTPHeaderFields {
-                for (key, value) in httpHeadersFields {
-                    print("\(key): \(value)")
-                }
+                logHeaders(headers: httpHeadersFields)
             }
             
             if let httpBody = request.httpBody, let httpBodyString = String(data: httpBody, encoding: .utf8) {
@@ -186,9 +184,7 @@ public class NetworkActivityLogger {
             case .debug:
                 print("\(String(response.statusCode)) '\(requestURL.absoluteString)' [\(String(format: "%.04f", elapsedTime)) s]:")
                 
-                for (key, value) in response.allHeaderFields {
-                    print("\(key): \(value)")
-                }
+                logHeaders(headers: response.allHeaderFields)
                 
                 guard let data = sessionDelegate[task]?.delegate.data else { break }
                     
@@ -217,6 +213,14 @@ private extension NetworkActivityLogger {
     
     func logDivider() {
         print("---------------------")
+    }
+    
+    func logHeaders(headers: [AnyHashable : Any]) {
+        print("Headers: [")
+        for (key, value) in headers {
+            print("  \(key) : \(value)")
+        }
+        print("]")
     }
     
 }
