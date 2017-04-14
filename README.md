@@ -89,6 +89,9 @@ If the default logging level is too verbose—say, if you only want to know when
 ```swift
 NetworkActivityLogger.shared.level = .error
 ```
+### AdvancedUsage
+
+You can also add a custom logger if you want more advanced logging like [XCGLogger](https://github.com/DaveWoodCom/XCGLogger) by overriding `logger` variable in `NetworkActivityLogger` class with a class that conforms to the `GenericLogger` protocol.
 
 ## Contact
 

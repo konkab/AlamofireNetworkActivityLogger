@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3FA98AB71EA0C31900AFF903 /* GenericLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA98AB61EA0C31900AFF903 /* GenericLogger.swift */; };
+		3FA98AB81EA0C31900AFF903 /* GenericLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA98AB61EA0C31900AFF903 /* GenericLogger.swift */; };
+		3FA98AB91EA0C31900AFF903 /* GenericLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA98AB61EA0C31900AFF903 /* GenericLogger.swift */; };
+		3FA98ABA1EA0C31900AFF903 /* GenericLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA98AB61EA0C31900AFF903 /* GenericLogger.swift */; };
+		3FA98AC31EA0C47800AFF903 /* ConsoleLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA98AC21EA0C47800AFF903 /* ConsoleLogger.swift */; };
+		3FA98AC41EA0C47800AFF903 /* ConsoleLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA98AC21EA0C47800AFF903 /* ConsoleLogger.swift */; };
+		3FA98AC51EA0C47800AFF903 /* ConsoleLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA98AC21EA0C47800AFF903 /* ConsoleLogger.swift */; };
+		3FA98AC61EA0C47800AFF903 /* ConsoleLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA98AC21EA0C47800AFF903 /* ConsoleLogger.swift */; };
 		AB2A9A301DBB4600004FC92E /* AlamofireNetworkActivityLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = AB2A9A2E1DBB4600004FC92E /* AlamofireNetworkActivityLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB2A9A3A1DBB46C1004FC92E /* NetworkActivityLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2A9A391DBB46C1004FC92E /* NetworkActivityLogger.swift */; };
 		AB2A9A571DBB4EC9004FC92E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB2A9A471DBB4E8A004FC92E /* Alamofire.framework */; };
@@ -79,6 +87,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3FA98AB61EA0C31900AFF903 /* GenericLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericLogger.swift; sourceTree = "<group>"; };
+		3FA98AC21EA0C47800AFF903 /* ConsoleLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleLogger.swift; sourceTree = "<group>"; };
 		AB2A9A2B1DBB4600004FC92E /* AlamofireNetworkActivityLogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AlamofireNetworkActivityLogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB2A9A2E1DBB4600004FC92E /* AlamofireNetworkActivityLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlamofireNetworkActivityLogger.h; sourceTree = "<group>"; };
 		AB2A9A2F1DBB4600004FC92E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -146,6 +156,8 @@
 		AB2A9A2D1DBB4600004FC92E /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				3FA98AC21EA0C47800AFF903 /* ConsoleLogger.swift */,
+				3FA98AB61EA0C31900AFF903 /* GenericLogger.swift */,
 				AB2A9A391DBB46C1004FC92E /* NetworkActivityLogger.swift */,
 				AB2A9A381DBB469C004FC92E /* Supporting Files */,
 			);
@@ -430,7 +442,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FA98AC31EA0C47800AFF903 /* ConsoleLogger.swift in Sources */,
 				AB2A9A3A1DBB46C1004FC92E /* NetworkActivityLogger.swift in Sources */,
+				3FA98AB71EA0C31900AFF903 /* GenericLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,7 +452,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FA98AC41EA0C47800AFF903 /* ConsoleLogger.swift in Sources */,
 				AB2A9A821DBB54D1004FC92E /* NetworkActivityLogger.swift in Sources */,
+				3FA98AB81EA0C31900AFF903 /* GenericLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,7 +462,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FA98AC51EA0C47800AFF903 /* ConsoleLogger.swift in Sources */,
 				AB2A9A831DBB54D2004FC92E /* NetworkActivityLogger.swift in Sources */,
+				3FA98AB91EA0C31900AFF903 /* GenericLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,7 +472,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FA98AC61EA0C47800AFF903 /* ConsoleLogger.swift in Sources */,
 				AB2A9A841DBB54D2004FC92E /* NetworkActivityLogger.swift in Sources */,
+				3FA98ABA1EA0C31900AFF903 /* GenericLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
