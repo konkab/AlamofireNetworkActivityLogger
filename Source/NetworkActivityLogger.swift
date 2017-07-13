@@ -28,7 +28,7 @@ import Alamofire
 import Foundation
 
 /// The level of logging detail.
-public enum NetworkActivityLoggerLevel {
+@objc public enum NetworkActivityLoggerLevel: Int {
     /// Do not log requests or responses.
     case off
     
@@ -49,7 +49,7 @@ public enum NetworkActivityLoggerLevel {
 }
 
 /// `NetworkActivityLogger` logs requests and responses made by Alamofire.SessionManager, with an adjustable level of detail.
-public class NetworkActivityLogger {
+public class NetworkActivityLogger: NSObject {
     // MARK: - Properties
     
     /// The shared network activity logger for the system.
@@ -65,7 +65,7 @@ public class NetworkActivityLogger {
     
     // MARK: - Internal - Initialization
     
-    init() {
+    override init() {
         level = .info
         startDates = [URLSessionTask: Date]()
     }
