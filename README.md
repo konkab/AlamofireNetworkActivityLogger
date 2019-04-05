@@ -14,7 +14,7 @@ Network activity logger for Alamofire.
 
 ## Dependencies
 
-- [Alamofire 4.6+](https://github.com/Alamofire/Alamofire)
+- [Alamofire 4.8+](https://github.com/Alamofire/Alamofire)
 
 ## Installation
 
@@ -26,7 +26,7 @@ Network activity logger for Alamofire.
 $ gem install cocoapods
 ```
 
-> CocoaPods 1.1.0+ is required.
+> CocoaPods 1.6.0+ is required.
 
 To integrate AlamofireNetworkActivityLogger into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
@@ -35,7 +35,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '10.0'
 use_frameworks!
 
-pod 'AlamofireNetworkActivityLogger', '~> 2.3'
+pod 'AlamofireNetworkActivityLogger', '~> 2.4'
 ```
 
 Then, run the following command:
@@ -58,7 +58,7 @@ $ brew install carthage
 To integrate AlamofireNetworkActivityLogger into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "konkab/AlamofireNetworkActivityLogger" ~> 2.3
+github "konkab/AlamofireNetworkActivityLogger" ~> 2.4
 ```
 
 ---
@@ -96,7 +96,7 @@ NetworkActivityLogger.shared.level = .error
 
 Konstantin Kabanov
 
-- konstantin@rktstudio.ru
+- kabanov_kv@me.com
 - Skype: konstantin_kabanov
 - [Linkedin](https://ru.linkedin.com/in/konstantinkabanov)
 
