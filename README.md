@@ -58,7 +58,7 @@ $ brew install carthage
 To integrate AlamofireNetworkActivityLogger into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "konkab/AlamofireNetworkActivityLogger" ~> 2.4
+github "konkab/AlamofireNetworkActivityLogger" ~> 3.0
 ```
 
 ---
@@ -96,7 +96,7 @@ NetworkActivityLogger.shared.level = .error
 
 Konstantin Kabanov
 
-- kabanov_kv@me.com
+- fever9@gmail.com
 - Skype: konstantin_kabanov
 - [Linkedin](https://ru.linkedin.com/in/konstantinkabanov)
 
