@@ -8,13 +8,13 @@ Network activity logger for Alamofire.
 
 ## Requirements
 
-- iOS 9.0+ / macOS 10.11+ / tvOS 9.0+ / watchOS 2.0+
-- Xcode 8.0+
-- Swift 3.2+
+- iOS 10.0+ / macOS 10.12+ / tvOS 10.0+ / watchOS 3.0+
+- Xcode 10.2+
+- Swift 5+
 
 ## Dependencies
 
-- [Alamofire 4.8+](https://github.com/Alamofire/Alamofire)
+- [Alamofire 5.0.0-rc.2+](https://github.com/Alamofire/Alamofire)
 
 ## Installation
 
@@ -26,7 +26,7 @@ Network activity logger for Alamofire.
 $ gem install cocoapods
 ```
 
-> CocoaPods 1.6.0+ is required.
+> CocoaPods 1.7.5+ is required.
 
 To integrate AlamofireNetworkActivityLogger into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
@@ -35,7 +35,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '10.0'
 use_frameworks!
 
-pod 'AlamofireNetworkActivityLogger', '~> 2.4'
+pod 'AlamofireNetworkActivityLogger', '~> 3.0'
 ```
 
 Then, run the following command:
