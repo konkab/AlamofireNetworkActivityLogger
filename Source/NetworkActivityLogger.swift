@@ -120,17 +120,13 @@ public class NetworkActivityLogger {
             
             switch self.level {
             case .debug:
+                let cURL = dataRequest.cURLDescription()
+                
                 self.logDivider()
                 
                 print("\(httpMethod) '\(requestURL.absoluteString)':")
                 
-                if let httpHeadersFields = request.allHTTPHeaderFields {
-                    self.logHeaders(headers: httpHeadersFields)
-                }
-                
-                if let httpBody = request.httpBody, let httpBodyString = String(data: httpBody, encoding: .utf8) {
-                    print(httpBodyString)
-                }
+                print("cURL:\n\(cURL)")
             case .info:
                 self.logDivider()
                 
@@ -184,6 +180,8 @@ public class NetworkActivityLogger {
                     
                     guard let data = dataRequest.data else { break }
                     
+                    print("Body:")
+                    
                     do {
                         let jsonObject = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
                         let prettyData = try JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted)
@@ -217,7 +215,7 @@ private extension NetworkActivityLogger {
     func logHeaders(headers: [AnyHashable : Any]) {
         print("Headers: [")
         for (key, value) in headers {
-            print("  \(key) : \(value)")
+            print("  \(key): \(value)")
         }
         print("]")
     }
