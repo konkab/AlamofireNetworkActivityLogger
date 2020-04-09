@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'AlamofireNetworkActivityLogger'
-  s.version = '3.0.0'
+  s.version = '3.0.1'
   s.license = 'MIT'
   s.summary = 'Network request logger for Alamofire'
   s.homepage = 'https://github.com/konkab/AlamofireNetworkActivityLogger'
@@ -16,5 +16,5 @@ Pod::Spec.new do |s|
   s.tvos.deployment_target = '10.0'
   s.watchos.deployment_target = '3.0'
 
-  s.dependency 'Alamofire', '~> 5.0.0-rc.2'
+  s.dependency 'Alamofire', '~> 5.0.0'
 end
