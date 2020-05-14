@@ -15,7 +15,7 @@ let package = Package(
             targets: ["AlamofireNetworkActivityLogger"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.0.0-rc.3")),
+        .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.0")),
     ],
     targets: [
         .target(
