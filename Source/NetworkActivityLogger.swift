@@ -61,13 +61,10 @@ public class NetworkActivityLogger {
     /// Omit requests which match the specified predicate, if provided.
     public var filterPredicate: NSPredicate?
     
-    private var startDates: [URLSessionTask: Date]
-    
     // MARK: - Internal - Initialization
     
     init() {
         level = .info
-        startDates = [URLSessionTask: Date]()
     }
     
     deinit {
@@ -118,7 +115,7 @@ public class NetworkActivityLogger {
             return
         }
         
-        startDates[task] = Date()
+        task.startDate = Date()
         
         switch level {
         case .debug:
@@ -159,9 +156,8 @@ public class NetworkActivityLogger {
         
         var elapsedTime: TimeInterval = 0.0
         
-        if let startDate = startDates[task] {
+        if let startDate = task.startDate {
             elapsedTime = Date().timeIntervalSince(startDate)
-            startDates[task] = nil
         }
         
         if let error = task.error {
@@ -223,5 +219,22 @@ private extension NetworkActivityLogger {
             print("  \(key) : \(value)")
         }
         print("]")
+    }
+}
+
+private extension URLSessionTask {
+    private struct AssociatedKeys {
+        static var startDate:Date?
+    }
+    
+    var startDate:Date? {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKeys.startDate) as? Date
+        }
+        set {
+            if let newValue = newValue {
+                objc_setAssociatedObject(self, &AssociatedKeys.startDate, newValue as Date?, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            }
+        }
     }
 }
