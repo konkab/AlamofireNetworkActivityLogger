@@ -245,6 +245,7 @@ private extension NetworkActivityLogger {
     func clearLoggingDirectory() {
         try? FileManager.default.removeItem(at: FileManager.default.outputURL)
         try? FileManager.default.createDirectory(at: FileManager.default.outputURL, withIntermediateDirectories: true)
+        print("NetworkActivityLogger directory: " + FileManager.default.outputURL.absoluteString)
     }
 
     func appendHeaders(headers: [AnyHashable : Any], content: inout Content) {
