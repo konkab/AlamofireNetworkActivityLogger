@@ -58,6 +58,10 @@ public class NetworkActivityLogger {
     /// The level of logging detail. See NetworkActivityLoggerLevel enum for possible values. .info by default.
     public var level: NetworkActivityLoggerLevel
     
+    
+    public static var delegate: NetworkActivityLoggerDelegate?
+
+    
     /// Omit requests which match the specified predicate, if provided.
     public var filterPredicate: NSPredicate?
     
@@ -162,6 +166,14 @@ public class NetworkActivityLogger {
                     
                     print("[Error] \(httpMethod) '\(requestURL.absoluteString)' [\(String(format: "%.04f", elapsedTime)) s]:")
                     print(error)
+                    let failedRequest = FailedRequest(title: "Failed",
+                                                      url: requestURL.absoluteString,
+                                                      method: httpMethod,
+                                                      elapsedTime: "[\(String(format: "%.04f", elapsedTime)) s]:",
+                                                      date: self.currentDate(),
+                                                      statusCode: 0,
+                                                      location: "[0,0,0,0]")
+                    NetworkActivityLogger.delegate?.failedRequest(request: failedRequest)
                 default:
                     break
                 }
@@ -196,14 +208,32 @@ public class NetworkActivityLogger {
                     }
                 case .info:
                     self.logDivider()
-                    
-                    print("\(String(response.statusCode)) '\(requestURL.absoluteString)' [\(String(format: "%.04f", elapsedTime)) s]")
+                    if response.statusCode != 200 {
+                        print("\(String(response.statusCode)) '\(requestURL.absoluteString)' [\(String(format: "%.04f", elapsedTime)) s] )")
+                        let failedRequest = FailedRequest(title: HTTPStatusCode(rawValue: response.statusCode)?.codeName,
+                                                          url: requestURL.absoluteString,
+                                                          method: httpMethod,
+                                                          elapsedTime: "[\(String(format: "%.04f", elapsedTime)) s]:",
+                                                          date: self.currentDate(),
+                                                          statusCode: response.statusCode ?? 0,
+                                                          location: "[0,0,0,0]")
+                        NetworkActivityLogger.delegate?.failedRequest(request: failedRequest)
+                    }
                 default:
                     break
                 }
             }
         }
         
+    }
+    
+    @objc private  func currentDate() -> String {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "En")
+        dateFormatter.dateFormat = "MMMM d, h:mm a"
+        let dateStr = dateFormatter.string(from: date) ?? ""
+        return dateStr
     }
 }
 
@@ -219,4 +249,18 @@ private extension NetworkActivityLogger {
         }
         print("]")
     }
+}
+
+public protocol NetworkActivityLoggerDelegate {
+    func failedRequest(request: FailedRequest)
+}
+
+public struct FailedRequest {
+    var title: String?
+    var url: String?
+    var method: String?
+    var elapsedTime: String?
+    var date: String?
+    var statusCode: Int?
+    var location: String?
 }
