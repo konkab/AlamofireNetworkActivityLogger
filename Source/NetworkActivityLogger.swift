@@ -256,11 +256,11 @@ public protocol NetworkActivityLoggerDelegate {
 }
 
 public struct FailedRequest {
-    var title: String?
-    var url: String?
-    var method: String?
-    var elapsedTime: String?
-    var date: String?
-    var statusCode: Int?
-    var location: String?
+    public var title: String?
+    public var url: String?
+    public var method: String?
+    public var elapsedTime: String?
+    public var date: String?
+    public var statusCode: Int?
+    public var location: String?
 }
