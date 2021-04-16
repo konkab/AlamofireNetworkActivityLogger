@@ -171,6 +171,7 @@ public class NetworkActivityLogger {
                                                       method: httpMethod,
                                                       elapsedTime: "[\(String(format: "%.04f", elapsedTime)) s]:",
                                                       date: self.currentDate(),
+                                                      dateNow: Date(),
                                                       statusCode: 0,
                                                       location: "[0,0,0,0]")
                     NetworkActivityLogger.delegate?.failedRequest(request: failedRequest)
@@ -215,6 +216,7 @@ public class NetworkActivityLogger {
                                                           method: httpMethod,
                                                           elapsedTime: "[\(String(format: "%.04f", elapsedTime)) s]:",
                                                           date: self.currentDate(),
+                                                          dateNow: Date(),
                                                           statusCode: response.statusCode ?? 0,
                                                           location: "[0,0,0,0]")
                         NetworkActivityLogger.delegate?.failedRequest(request: failedRequest)
@@ -261,6 +263,7 @@ public struct FailedRequest {
     public var method: String?
     public var elapsedTime: String?
     public var date: String?
+    public var dateNow: Date?
     public var statusCode: Int?
     public var location: String?
 }
