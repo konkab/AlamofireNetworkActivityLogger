@@ -58,6 +58,10 @@ public class NetworkActivityLogger {
     /// The level of logging detail. See NetworkActivityLoggerLevel enum for possible values. .info by default.
     public var level: NetworkActivityLoggerLevel
     
+    
+    public static var delegate: NetworkActivityLoggerDelegate?
+
+    
     /// Omit requests which match the specified predicate, if provided.
     public var filterPredicate: NSPredicate?
     
@@ -162,6 +166,17 @@ public class NetworkActivityLogger {
                     
                     print("[Error] \(httpMethod) '\(requestURL.absoluteString)' [\(String(format: "%.04f", elapsedTime)) s]:")
                     print(error)
+                    let failedRequest = FailedRequest(title: error.localizedDescription,
+                                                      timestamp: "\(self.currentTimeMillis(date: Date()))",
+                                                      url: requestURL.absoluteString,
+                                                      method: httpMethod,
+                                                      elapsedTime: "[\(String(format: "%.04f", elapsedTime)) s]:",
+                                                      date: self.currentDate(),
+                                                      dateNow: Date(),
+                                                      statusCode: 0,
+                                                      longitude: nil,
+                                                      latitude: nil)
+                    NetworkActivityLogger.delegate?.failedRequest(request: failedRequest)
                 default:
                     break
                 }
@@ -196,14 +211,39 @@ public class NetworkActivityLogger {
                     }
                 case .info:
                     self.logDivider()
-                    
-                    print("\(String(response.statusCode)) '\(requestURL.absoluteString)' [\(String(format: "%.04f", elapsedTime)) s]")
+                    if response.statusCode != 200 {
+                        print("\(String(response.statusCode)) '\(requestURL.absoluteString)' [\(String(format: "%.04f", elapsedTime)) s] )")
+                        let failedRequest = FailedRequest(title: HTTPStatusCode(rawValue: response.statusCode)?.codeName,
+                                                          timestamp: "\(self.currentTimeMillis(date: Date()))",
+                                                          url: requestURL.absoluteString,
+                                                          method: httpMethod,
+                                                          elapsedTime: "[\(String(format: "%.04f", elapsedTime)) s]:",
+                                                          date: self.currentDate(),
+                                                          dateNow: Date(),
+                                                          statusCode: response.statusCode ?? 0,
+                                                          longitude: nil,
+                                                          latitude: nil)
+                        NetworkActivityLogger.delegate?.failedRequest(request: failedRequest)
+                    }
                 default:
                     break
                 }
             }
         }
         
+    }
+    
+    @objc private  func currentDate() -> String {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "En")
+        dateFormatter.dateFormat = "MMMM d, h:mm a"
+        let dateStr = dateFormatter.string(from: date) ?? ""
+        return dateStr
+    }
+    
+    @objc private func currentTimeMillis(date: Date) -> Int64 {
+        return Int64(date.timeIntervalSince1970 * 1000)
     }
 }
 
@@ -219,4 +259,21 @@ private extension NetworkActivityLogger {
         }
         print("]")
     }
+}
+
+public protocol NetworkActivityLoggerDelegate {
+    func failedRequest(request: FailedRequest)
+}
+
+public struct FailedRequest {
+    public var title: String?
+    public var timestamp: String
+    public var url: String?
+    public var method: String?
+    public var elapsedTime: String?
+    public var date: String?
+    public var dateNow: Date?
+    public var statusCode: Int?
+    public var longitude: String?
+    public var latitude: String?
 }

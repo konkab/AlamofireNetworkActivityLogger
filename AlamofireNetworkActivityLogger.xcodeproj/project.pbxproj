@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0BBCE7842628DBF20078C7E9 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCE7832628DBF20078C7E9 /* HTTPStatusCode.swift */; };
+		0BBCE7852628DBF20078C7E9 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCE7832628DBF20078C7E9 /* HTTPStatusCode.swift */; };
+		0BBCE7862628DBF20078C7E9 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCE7832628DBF20078C7E9 /* HTTPStatusCode.swift */; };
+		0BBCE7872628DBF20078C7E9 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCE7832628DBF20078C7E9 /* HTTPStatusCode.swift */; };
 		AB2A9A301DBB4600004FC92E /* AlamofireNetworkActivityLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = AB2A9A2E1DBB4600004FC92E /* AlamofireNetworkActivityLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB2A9A3A1DBB46C1004FC92E /* NetworkActivityLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2A9A391DBB46C1004FC92E /* NetworkActivityLogger.swift */; };
 		AB2A9A571DBB4EC9004FC92E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB2A9A471DBB4E8A004FC92E /* Alamofire.framework */; };
@@ -79,6 +83,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0BBCE7832628DBF20078C7E9 /* HTTPStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
 		AB2A9A2B1DBB4600004FC92E /* AlamofireNetworkActivityLogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AlamofireNetworkActivityLogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB2A9A2E1DBB4600004FC92E /* AlamofireNetworkActivityLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlamofireNetworkActivityLogger.h; sourceTree = "<group>"; };
 		AB2A9A2F1DBB4600004FC92E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -147,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				AB2A9A391DBB46C1004FC92E /* NetworkActivityLogger.swift */,
+				0BBCE7832628DBF20078C7E9 /* HTTPStatusCode.swift */,
 				AB2A9A381DBB469C004FC92E /* Supporting Files */,
 			);
 			path = Source;
@@ -431,6 +437,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BBCE7842628DBF20078C7E9 /* HTTPStatusCode.swift in Sources */,
 				AB2A9A3A1DBB46C1004FC92E /* NetworkActivityLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,6 +446,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BBCE7852628DBF20078C7E9 /* HTTPStatusCode.swift in Sources */,
 				AB2A9A821DBB54D1004FC92E /* NetworkActivityLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -447,6 +455,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BBCE7862628DBF20078C7E9 /* HTTPStatusCode.swift in Sources */,
 				AB2A9A831DBB54D2004FC92E /* NetworkActivityLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -455,6 +464,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BBCE7872628DBF20078C7E9 /* HTTPStatusCode.swift in Sources */,
 				AB2A9A841DBB54D2004FC92E /* NetworkActivityLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
